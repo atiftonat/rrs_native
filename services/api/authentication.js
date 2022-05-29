@@ -14,7 +14,6 @@ const getJWT = async (logInDto) => {
         body: JSON.stringify(logInDto)
     })
     .then(response => {     
-        debugger;
         if(response.ok){
             return response.json();
         }       

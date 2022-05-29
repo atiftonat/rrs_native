@@ -8,11 +8,9 @@ const getAvailable = async (startDate, endDate) =>
         return await fetch(`${endpoint}/available/${startDateIso}`)
                         .then( response => response.json());
     }
-    else{
-        let endDateIso = new Date(endDate).toISOString();
-        return await fetch(`${endpoint}/available/${startDateIso}/${endDateIso}`)
-                        .then( response => response.json());
-    }
+    let endDateIso = new Date(endDate).toISOString();
+    return await fetch(`${endpoint}/available/${startDateIso}/${endDateIso}`)
+                    .then( response => response.json());
 };
 
 const getDayTypes = async (date) =>
@@ -29,11 +27,9 @@ const getDistinctAvailable = async (startDate, endDate) =>
         return await fetch(`${endpoint}/distinct-available/${startDateIso}`)
                         .then( response => response.json());
     }
-    else{
-        let endDateIso = new Date(endDate).toISOString();
-        return await fetch(`${endpoint}/distinct-available/${startDateIso}/${endDateIso}`)
-                        .then( response => response.json());
-    }
+    let endDateIso = new Date(endDate).toISOString();
+    return await fetch(`${endpoint}/distinct-available/${startDateIso}/${endDateIso}`)
+                    .then( response => response.json());
 };
 
 export { getAvailable, getDistinctAvailable, getDayTypes };

@@ -11,15 +11,62 @@ const create = async (reservationDto) => {
         },
         body: JSON.stringify(reservationDto)
     })
-    .then(response => {       
-        if(response.ok){
-            return response.json();
-        }       
-        return {...response,error:true} ;              
-    });
+        .then(response => {       
+            if(response.ok){
+                return response.json();
+            }       
+            return {...response,error:true} ;              
+        });
 };
 
-export { create };
+//why not just ternary to add optional end-date rather then repeating code
+const getAny = async (startDate, endDate, jwt) => {
+    let startDateIso = new Date(startDate).toISOString();
+    if(end === undefined){
+        return await fetch(`${endpoint}/any/${startDateIso}`, {
+            method: "GET",
+            headers: { 
+                "Authorization" : jwt === undefined ? "" : `Bearer ${jwt}`
+            }
+        })
+            .then(response => {
+                if(response.ok){
+                    return response.json();
+                }
+                return {...response, error:true, status:response.status}
+            });
+    }
+    let endDateIso = new Date(endDate).toISOString();
+    return await fetch(`${endpoint}/any/${startDateIso}/${endDateIso}`, {
+        method: "GET",
+        headers: { 
+            "Authorization" : jwt === undefined ? "" : `Bearer ${jwt}`
+        }
+    })
+        .then(response => {
+            if(response.ok){
+                return response.json();
+            }
+            return {...response, error:true, status:response.status}
+        });
+
+    //COMINED W/ TERNARY
+    // let endDateIso = endDate === undefined ? "" : new Date(endDate).toISOString();
+    // return await fetch(`${endpoint}/any/${startDateIso}/${endDateIso}`, {
+    //     method: "GET",
+    //     headers: { 
+    //         "Authorization" : jwt === undefined ? "" : `Bearer ${jwt}`
+    //     }
+    // })
+    //     .then(response => {
+    //         if(response.ok){
+    //             return response.json();
+    //         }
+    //         return {...response, error:true, status:response.status}
+    //     });
+};
+
+export { create, getAny };
 
 
 //DUMMY DATA BELOW
