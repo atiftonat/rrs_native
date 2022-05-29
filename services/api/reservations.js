@@ -1,9 +1,9 @@
-let baseUrl = "https://localhost:7271/api/reservations";
+let endpoint = "https://localhost:7271/api/reservations";
 
 //REQUIRES (obj with following properties): customerNotes, noOfGuests, sittingId, reservationOriginId, firstName, lastName, email, phoneNumber, restaurantId
 //API RETURNS: new reservation object that is created (Not currently utilised in this fetch).
 const create = async (reservationDto) => {
-    return await fetch(baseUrl, {
+    return await fetch(endpoint, {
         method: "POST",
         headers: {
             "Accept": "application/json",

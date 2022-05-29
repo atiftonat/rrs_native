@@ -1,7 +1,11 @@
-let baseUrl = "https://localhost:7271/api/tokens";
+import { createContext } from 'react';
+
+const context = createContext(null); 
+
+let endpoint = "https://localhost:7271/api/tokens";
 
 const getJWT = async (logInDto) => {
-    return await fetch(baseUrl, {
+    return await fetch(endpoint, {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -10,6 +14,7 @@ const getJWT = async (logInDto) => {
         body: JSON.stringify(logInDto)
     })
     .then(response => {     
+        debugger;
         if(response.ok){
             return response.json();
         }       
@@ -17,4 +22,4 @@ const getJWT = async (logInDto) => {
     });
 };
 
-export { getJWT }; 
+export { getJWT, context }; 
