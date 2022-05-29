@@ -13,7 +13,7 @@ const getJWT = async (logInDto) => {
         if(response.ok){
             return response.json();
         }       
-        return {...response, error:true} ;              
+        return {...response, error:true, status: response.status} ;              
     });
 };
 

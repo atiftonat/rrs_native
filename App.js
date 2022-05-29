@@ -15,6 +15,7 @@ export default function App() {
     if(validLoginDetails(email, password)){
       fetchApi.tokens.getJWT({email, password})
       .then(data => {
+        debugger;
         if(data.error){
           setSummaryErrMsg("email and password combination not recognised");
           return;
