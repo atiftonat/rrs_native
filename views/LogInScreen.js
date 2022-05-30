@@ -40,7 +40,7 @@ function LogInScreen({ navigation }){
   
     return(
         <SafeAreaView style={styles.container}>
-
+          
             <Text>{summaryErrMsg}</Text>
             <TextInput
               style={styles.input}

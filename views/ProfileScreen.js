@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import { fetchApi } from '../services'
+import { ReservationTile } from '../components'
 
 function ProfileScreen({ navigation, route }) {
     const [reservations, setReservations] = useState(null);
