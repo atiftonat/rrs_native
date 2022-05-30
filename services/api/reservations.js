@@ -19,7 +19,21 @@ const create = async (reservationDto) => {
         });
 };
 
-//why not just ternary to add optional end-date rather then repeating code
+const getAll = async (email, jwt) => {
+    return await fetch(`${endpoint}/all/${email}`, {
+        method: "GET",
+        headers: { 
+            "Authorization" : jwt === undefined ? "" : `Bearer ${jwt}`
+        }
+    })
+        .then(response => {
+            if(response.ok){
+                return response.json();
+            }
+            return {...response, error:true, status:response.status}
+        });
+};
+
 const getAny = async (startDate, endDate, jwt) => {
     let startDateIso = new Date(startDate).toISOString();
     if(end === undefined){
@@ -50,7 +64,7 @@ const getAny = async (startDate, endDate, jwt) => {
             return {...response, error:true, status:response.status}
         });
 
-    //COMINED W/ TERNARY
+    //COMINED W/ TERNARY -- Untested
     // let endDateIso = endDate === undefined ? "" : new Date(endDate).toISOString();
     // return await fetch(`${endpoint}/any/${startDateIso}/${endDateIso}`, {
     //     method: "GET",
@@ -66,7 +80,7 @@ const getAny = async (startDate, endDate, jwt) => {
     //     });
 };
 
-export { create, getAny };
+export { create, getAny, getAll };
 
 
 //DUMMY DATA BELOW

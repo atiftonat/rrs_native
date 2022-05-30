@@ -1,21 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import { fetchApi } from '../services'
 
-function ProfileScreen() {
+function ProfileScreen({ navigation, route }) {
     const [reservations, setReservations] = useState(null);
     const [pastReservations, setPastReservations] = useState(null);
     const [upcomingReservations, setUpcomingReservations] = useState(null);
+    const AuthContext = fetchApi.authentication.context;
+    const { jwt, setJwt } = useContext(AuthContext);
+    const { email } = route.params;
 
     useEffect(() => {
         //Since restaurant opened
         //Refer to res SPA for acceptable date format
-        fetchApi.reservations.getAny("2022-01-01")
+        fetchApi.reservations.getAll(email, jwt)
             .then(response => {
-                if(response.status === 404){
+                if(response.status === 403){
                     //Forbidden member screen (admin, employee)
+                    console.log("403: Account not member");
                 }
-                //map through to divide into upcoming & past states or just set to all reservations state
+                console.log(response);
+                setReservations(response);
             });
     }, []);
 

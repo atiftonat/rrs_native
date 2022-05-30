@@ -5,8 +5,8 @@ import { fetchApi } from '../services';
 function LogInScreen({ navigation }){
   const AuthContext = fetchApi.authentication.context;
   const { jwt, setJwt } = useContext(AuthContext);
-  const [email, setEmail] = useState("a@e.com");
-  const [password, setPassword] = useState("Abc123!@#");
+  const [email, setEmail] = useState("Seed@Person1.com");
+  const [password, setPassword] = useState("JellyBean1!");
   const [emailErrMsg, setEmailErrMsg] = useState("");
   const [passwordErrMsg, setPasswordErrMsg] = useState("");
   const [summaryErrMsg, setSummaryErrMsg] = useState("");
@@ -15,19 +15,20 @@ function LogInScreen({ navigation }){
     if(validLoginDetails(email, password)){
       fetchApi.authentication.getJWT({email, password})
       .then(data => {
-        debugger;
         if(data.error){
           setSummaryErrMsg("email and password combination not recognised");
           return;
         }
         setJwt(data);
-        navigation.navigate('Profile')
+        navigation.navigate('Profile', {
+          email: `${email}`
+        })
       });
     }
   };
 
   const validLoginDetails = (email, password) => {
-    let regE = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    let regE = /(.+)@(.+){1,}\.(.+){1,}/;
     setEmailErrMsg(regE.test(email) === false ? "invalid email, please try again" : "");
 
     let regP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])(?=.*[a-zA-Z]).{6,}$/;
