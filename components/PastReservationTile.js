@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 
 function PastReservationTile (props){
     const reservation = props.reservation;
-    const [isExpanded, setisExpanded] = useState(false);
+    const [isExpanded, setisExpanded] = useState(false); //not expanding, review prop
 
     const toggleTile = () => {
         if(isExpanded){
