@@ -81,7 +81,7 @@ function ProfileScreen({ navigation, route }) {
             setSelected = {()=>setSelectedUpcomingTileIndex(r.Id)}
 
         />));
-    }, [reservationsUpcomingData, selectedUpcomingTileIndex, upcomingReservations]);
+    }, [reservationsUpcomingData, upcomingReservations, selectedUpcomingTileIndex]);
 
     useEffect(() => {      
         setPastReservations(reservationsPastData.map((r,i) =>  
