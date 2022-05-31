@@ -12,7 +12,7 @@ function ProfileScreen({ navigation, route }) {
     const AuthContext = fetchApi.authentication.context;
     const { jwt, setJwt } = useContext(AuthContext);
     const [ selectedUpcomingTileIndex, setSelectedUpcomingTileIndex ] = useState(6);
-    const [selectedUpcomingTile]
+    //const [selectedUpcomingTile]
     // const { email } = route.params;
 
     const dummyUpcoming = [
