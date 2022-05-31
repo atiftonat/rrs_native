@@ -5,7 +5,6 @@ function UpcomingReservationTile(props){
     const reservation = props.reservation;
     const setSelected = props.setSelected;
     let isExpanded = props.isExpanded;
-    
 
     // const toggleTile = () => {
     //     if(isExpanded){
@@ -17,14 +16,14 @@ function UpcomingReservationTile(props){
     
     if(isExpanded){
         return(
-            <View style={styles.containerExpanded} onStartShouldSetResponder={() => setSelected()}>
+            <View style={styles.containerExpanded} onStartShouldSetResponder={setSelected}>
                 <Text>Expanded: {reservation.date} {reservation.time}</Text>
                 <Text>{reservation.type}</Text>
             </View>
         );
     }
     return(
-        <View style={styles.containerCollapsed} onStartShouldSetResponder={() => setSelected()}>
+        <View style={styles.containerCollapsed} onStartShouldSetResponder={setSelected}>
             <Text>Collapsed: {reservation.date} {reservation.time}</Text>
         </View>
     );
