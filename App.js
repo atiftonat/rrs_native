@@ -3,8 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React, { useState } from 'react';
 import { LogInScreen, ProfileScreen } from './views'
 import { fetchApi } from './services';
-// remove
-import { UpcomingReservationTile } from './components' 
 
 export default function App() {
   const AuthContext = fetchApi.authentication.context;
@@ -15,7 +13,7 @@ export default function App() {
     <AuthContext.Provider value={{jwt ,setJwt}}>
       <NavigationContainer>
         {/* initialRouteName='LogIn' */}
-        <Stack.Navigator initialRouteName='Upcoming'> 
+        <Stack.Navigator initialRouteName='Profile'> 
           <Stack.Screen 
             name='LogIn' 
             component={LogInScreen} 
@@ -25,12 +23,6 @@ export default function App() {
             name='Profile' 
             component={ProfileScreen} 
             options={{ title: 'Member Profile'}}
-          />
-          {/* remove */}
-          <Stack.Screen 
-            name='Upcoming' 
-            component={UpcomingReservationTile} 
-            options={{ title: 'Upcoming'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

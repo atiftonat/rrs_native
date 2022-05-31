@@ -2,23 +2,28 @@ import { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 
 function UpcomingReservationTile(props){  
-    const reservation = {
-        date: "2022-12-12", 
-        time: "9:00 AM",
-        type: "Breakfast"
-    }; //props.reservation
-    const [isExpanded, setisExpanded] = useState(false); //props.isExpanded
+    const reservation = props.reservation;
+    const [isExpanded, setisExpanded] = useState(props.isExpanded);
+
+    const toggleTile = () => {
+        if(isExpanded){
+            setisExpanded(false);
+            return;
+        }
+        props.setSelectedUpcomingTileIndex();
+        setisExpanded(true);
+    };
     
     if(isExpanded){
         return(
-            <View style={styles.containerExpanded}>
+            <View style={styles.containerExpanded} onStartShouldSetResponder={() => {toggleTile()}}>
                 <Text>Expanded: {reservation.date} {reservation.time}</Text>
                 <Text>{reservation.type}</Text>
             </View>
         );
     }
     return(
-        <View style={styles.containerCollapsed}>
+        <View style={styles.containerCollapsed} onStartShouldSetResponder={() => {toggleTile()}}>
             <Text>Collapsed: {reservation.date} {reservation.time}</Text>
         </View>
     );
@@ -30,12 +35,18 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+      borderWidth: 2,
+      borderRadius: 10,
+      marginHorizontal: 10
     },
     containerCollapsed: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        borderWidth: 2,
+        borderRadius: 10,
+        marginHorizontal: 10
       }
 });
 
