@@ -81,7 +81,7 @@ function ProfileScreen({ navigation, route }) {
             setSelected = {()=>setSelectedUpcomingTileIndex(r.Id)}
 
         />));
-    }, [reservationsUpcomingData, upcomingReservations, selectedUpcomingTileIndex]);
+    }, [reservationsUpcomingData, selectedUpcomingTileIndex]);
 
     useEffect(() => {      
         setPastReservations(reservationsPastData.map((r,i) =>  
@@ -89,7 +89,7 @@ function ProfileScreen({ navigation, route }) {
             key = {`pastRes${r.Id}`}
             reservation = {r}
         />));
-    }, [reservationsPastData, pastReservations]);
+    }, [reservationsPastData]);
 
     return(
         <SafeAreaView>
