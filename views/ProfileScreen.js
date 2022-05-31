@@ -5,29 +5,54 @@ import { UpcomingReservationTile, PastReservationTile } from '../components'
 import { ScrollView } from 'react-native-web';
 
 function ProfileScreen({ navigation, route }) {
-    const [reservations, setReservations] = useState([]);
+    const [reservationsUpcomingData, setReservationsUpcomingData] = useState([]);
+    const [reservationsPastData, setReservationsPastData] = useState([]);
     const [pastReservations, setPastReservations] = useState([]);
     const [upcomingReservations, setUpcomingReservations] = useState(null);
     const AuthContext = fetchApi.authentication.context;
     const { jwt, setJwt } = useContext(AuthContext);
-    const [ selectedUpcomingTileIndex, setSelectedUpcomingTileIndex ] = useState(0);
+    const [ selectedUpcomingTileIndex, setSelectedUpcomingTileIndex ] = useState(6);
+    const [selectedUpcomingTile]
     // const { email } = route.params;
 
     const dummyUpcoming = [
         {
         date: "2022-12-12", 
         time: "9:00 AM",
-        type: "Breakfast"
+        type: "Breakfast",
+        Id: "6"
         },
         {
             date: "2022-12-12", 
             time: "1:00 PM",
-            type: "Lunch"
+            type: "Lunch",
+            Id: "5"
         },
         {
             date: "2022-12-12", 
             time: "5:00 PM",
-            type: "Dinner"
+            type: "Dinner",
+            Id: "4"
+        }
+    ];
+    const dummyPast = [
+        {
+            date: "2022-03-20", 
+            time: "9:00 AM",
+            type: "Breakfast",
+            Id: "3"
+        },
+        {
+            date: "2022-03-20", 
+            time: "1:00 PM",
+            type: "Lunch",
+            Id: "2"
+        },
+        {
+            date: "2022-03-20", 
+            time: "5:00 PM",
+            type: "Dinner",
+            Id: "1"
         }
     ];
 
@@ -43,22 +68,28 @@ function ProfileScreen({ navigation, route }) {
         //         // console.log(response);
         //         // setReservations(response); //SORT IN ENDPOINT
         //     });
-        setReservations(dummyUpcoming);
+        setReservationsUpcomingData(dummyUpcoming);
+        setReservationsPastData(dummyPast);
     }, []);
 
     useEffect(() => {      
-        setUpcomingReservations(reservations.map((r,i) =>  
+        setUpcomingReservations(reservationsUpcomingData.map((r,i) =>  
         <UpcomingReservationTile 
-            key = {`upcomingRes${i}`}
+            key = {`upcomingRes${r.Id}`}
             reservation = {r}
-        />));
+            isExpanded = {r.id==selectedUpcomingTileIndex}
+            setSelected = {()=>setSelectedUpcomingTileIndex(r.Id)}
 
-        setPastReservations(reservations.map((r,i) =>  
+        />));
+    }, [reservationsUpcomingData, selectedUpcomingTileIndex, upcomingReservations]);
+
+    useEffect(() => {      
+        setPastReservations(reservationsPastData.map((r,i) =>  
         <PastReservationTile 
-            key = {`pastRes${i}`}
+            key = {`pastRes${r.Id}`}
             reservation = {r}
         />));
-    }, [reservations, selectedUpcomingTileIndex]);
+    }, [reservationsPastData, pastReservations]);
 
     return(
         <SafeAreaView>

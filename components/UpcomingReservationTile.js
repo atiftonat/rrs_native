@@ -3,26 +3,28 @@ import { View, Text, StyleSheet } from 'react-native'
 
 function UpcomingReservationTile(props){  
     const reservation = props.reservation;
-    const [isExpanded, setisExpanded] = useState(props.isExpanded);
+    const setSelected = props.setSelected;
+    let isExpanded = props.isExpanded;
+    
 
-    const toggleTile = () => {
-        if(isExpanded){
-            setisExpanded(false);
-            return;
-        }
-        setisExpanded(true);
-    };
+    // const toggleTile = () => {
+    //     if(isExpanded){
+    //         setisExpanded(false);
+    //         return;
+    //     }
+    //     setisExpanded(true);
+    // };
     
     if(isExpanded){
         return(
-            <View style={styles.containerExpanded} onStartShouldSetResponder={() => toggleTile()}>
+            <View style={styles.containerExpanded} onStartShouldSetResponder={() => setSelected()}>
                 <Text>Expanded: {reservation.date} {reservation.time}</Text>
                 <Text>{reservation.type}</Text>
             </View>
         );
     }
     return(
-        <View style={styles.containerCollapsed} onStartShouldSetResponder={() => toggleTile()}>
+        <View style={styles.containerCollapsed} onStartShouldSetResponder={() => setSelected()}>
             <Text>Collapsed: {reservation.date} {reservation.time}</Text>
         </View>
     );
