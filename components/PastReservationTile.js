@@ -1,15 +1,52 @@
-import { View, Text } from 'react-native'
+import { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native'
 
-function PastReservationTile (isExpanded){
-    // let tile = isExpanded ?
+function PastReservationTile (props){
+    const reservation = props.reservation;
+    const [isExpanded, setisExpanded] = useState(false);
 
+    const toggleTile = () => {
+        if(isExpanded){
+            setisExpanded(false);
+            return;
+        }
+        setisExpanded(true);
+    };
     
-
-    return(       
-        <View>
-
+    if(isExpanded){
+        return(
+            <View style={styles.containerExpanded} onStartShouldSetResponder={() => toggleTile()}>
+                <Text>Expanded: {reservation.date} {reservation.time}</Text>
+                <Text>{reservation.type}</Text>
+            </View>
+        );
+    }
+    return(
+        <View style={styles.containerCollapsed} onStartShouldSetResponder={() => toggleTile()}>
+            <Text>Collapsed: {reservation.date} {reservation.time}</Text>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    containerExpanded: {
+      flex: 2,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderWidth: 2,
+      borderRadius: 10,
+      marginHorizontal: 10
+    },
+    containerCollapsed: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderRadius: 10,
+        marginHorizontal: 10
+    }
+});
 
 export { PastReservationTile  };

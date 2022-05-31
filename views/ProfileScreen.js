@@ -1,12 +1,12 @@
 import { useEffect, useState, useContext } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import { fetchApi } from '../services'
-import { UpcomingReservationTile } from '../components'
+import { UpcomingReservationTile, PastReservationTile } from '../components'
 import { ScrollView } from 'react-native-web';
 
 function ProfileScreen({ navigation, route }) {
     const [reservations, setReservations] = useState([]);
-    const [pastReservations, setPastReservations] = useState(null);
+    const [pastReservations, setPastReservations] = useState([]);
     const [upcomingReservations, setUpcomingReservations] = useState(null);
     const AuthContext = fetchApi.authentication.context;
     const { jwt, setJwt } = useContext(AuthContext);
@@ -46,20 +46,26 @@ function ProfileScreen({ navigation, route }) {
         setReservations(dummyUpcoming);
     }, []);
 
-    useEffect(() => {
+    useEffect(() => {      
         setUpcomingReservations(reservations.map((r,i) =>  
         <UpcomingReservationTile 
             key = {`upcomingRes${i}`}
-            reservation = {r} 
-            isExpanded = {i == selectedUpcomingTileIndex ? true : false} 
-            setSelectedUpcomingTileIndex = {() => setSelectedUpcomingTileIndex(i)}
+            reservation = {r}
         />));
-    }, [reservations]);
+
+        setPastReservations(reservations.map((r,i) =>  
+        <PastReservationTile 
+            key = {`pastRes${i}`}
+            reservation = {r}
+        />));
+    }, [reservations, selectedUpcomingTileIndex]);
 
     return(
         <SafeAreaView>
             <Text>Profile Screen</Text>
             {upcomingReservations}
+            <Text><br /></Text>
+            {pastReservations}
         </SafeAreaView>
     );
 }

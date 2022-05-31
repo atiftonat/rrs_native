@@ -10,20 +10,19 @@ function UpcomingReservationTile(props){
             setisExpanded(false);
             return;
         }
-        props.setSelectedUpcomingTileIndex();
         setisExpanded(true);
     };
     
     if(isExpanded){
         return(
-            <View style={styles.containerExpanded} onStartShouldSetResponder={() => {toggleTile()}}>
+            <View style={styles.containerExpanded} onStartShouldSetResponder={() => toggleTile()}>
                 <Text>Expanded: {reservation.date} {reservation.time}</Text>
                 <Text>{reservation.type}</Text>
             </View>
         );
     }
     return(
-        <View style={styles.containerCollapsed} onStartShouldSetResponder={() => {toggleTile()}}>
+        <View style={styles.containerCollapsed} onStartShouldSetResponder={() => toggleTile()}>
             <Text>Collapsed: {reservation.date} {reservation.time}</Text>
         </View>
     );
