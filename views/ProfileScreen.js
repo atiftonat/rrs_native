@@ -8,7 +8,7 @@ function ProfileScreen({ navigation, route }) {
     const [reservationsUpcomingData, setReservationsUpcomingData] = useState([]);
     const [reservationsPastData, setReservationsPastData] = useState([]);
     const [pastReservations, setPastReservations] = useState([]);
-    const [upcomingReservations, setUpcomingReservations] = useState(null);
+    const [upcomingReservations, setUpcomingReservations] = useState([]]);
     const AuthContext = fetchApi.authentication.context;
     const { jwt, setJwt } = useContext(AuthContext);
     const [ selectedUpcomingTileIndex, setSelectedUpcomingTileIndex ] = useState(6);
