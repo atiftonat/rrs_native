@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 
-function ReservationTile(isExpanded){
+function PastReservationTile (isExpanded){
     // let tile = isExpanded ?
 
     
@@ -12,4 +12,4 @@ function ReservationTile(isExpanded){
     );
 }
 
-export { ReservationTile };
+export { PastReservationTile  };

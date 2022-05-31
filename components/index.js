@@ -1,1 +1,2 @@
-export * from './ReservationTile'
+export * from './PastReservationTile';
+export * from './UpcomingReservationTile';
