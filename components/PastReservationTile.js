@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 
 function PastReservationTile (props){
+    const styles = props.styles;
     const reservation = props.reservation;
     const [isExpanded, setisExpanded] = useState(false); //not expanding, review prop
 
@@ -15,38 +16,22 @@ function PastReservationTile (props){
     
     if(isExpanded){
         return(
-            <View style={styles.containerExpanded} onStartShouldSetResponder={() => toggleTile()}>
-                <Text>Expanded: {reservation.date} {reservation.time}</Text>
+            <View 
+            //Round corners of 1st & last res
+            style={props.index == 0 ? styles.pstFirstExpanded : props.index == props.length - 1 ? styles.pstLastExpanded : styles.pstExpanded} 
+            onStartShouldSetResponder={() => toggleTile()}>
+                <Text>{reservation.date} {reservation.time}</Text>
                 <Text>{reservation.type}</Text>
             </View>
         );
     }
     return(
-        <View style={styles.containerCollapsed} onStartShouldSetResponder={() => toggleTile()}>
+        <View
+        style={props.index == 0 ? styles.pstFirstCollapsed : props.index == props.length - 1 ? styles.pstLastCollapsed : styles.pstCollapsed}
+        onStartShouldSetResponder={() => toggleTile()}>
             <Text>Collapsed: {reservation.date} {reservation.time}</Text>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    containerExpanded: {
-      flex: 2,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderWidth: 2,
-      borderRadius: 10,
-      marginHorizontal: 10
-    },
-    containerCollapsed: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 2,
-        borderRadius: 10,
-        marginHorizontal: 10
-    }
-});
 
 export { PastReservationTile  };

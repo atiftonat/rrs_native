@@ -1,53 +1,30 @@
-import { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 
 function UpcomingReservationTile(props){  
+    const styles = props.styles;
     const reservation = props.reservation;
     const setSelected = props.setSelected;
     let isExpanded = props.isExpanded;
 
-    // const toggleTile = () => {
-    //     if(isExpanded){
-    //         setisExpanded(false);
-    //         return;
-    //     }
-    //     setisExpanded(true);
-    // };
-    
     if(isExpanded){
         return(
-            <View style={styles.containerExpanded} onStartShouldSetResponder={setSelected}>
+            <View 
+            style={props.index == 0 ? styles.upcFirstExpanded : props.index == props.length - 1 ? styles.upcLastExpanded : styles.upcExpanded}
+            onStartShouldSetResponder={setSelected}>
                 <Text>Expanded: {reservation.date} {reservation.time}</Text>
-                <Text>{reservation.type}</Text>
+                <View style={styles.upcBody}>
+                    <Text>{reservation.type}</Text>
+                </View>
             </View>
         );
     }
     return(
-        <View style={styles.containerCollapsed} onStartShouldSetResponder={setSelected}>
+        <View 
+        style={props.index == 0 ? styles.upcFirstExpanded : props.index == props.length - 1 ? styles.upcLastExpanded : styles.upcExpanded}
+        onStartShouldSetResponder={setSelected}>
             <Text>Collapsed: {reservation.date} {reservation.time}</Text>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    containerExpanded: {
-      flex: 2,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderWidth: 2,
-      borderRadius: 10,
-      marginHorizontal: 10
-    },
-    containerCollapsed: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 2,
-        borderRadius: 10,
-        marginHorizontal: 10
-      }
-});
 
 export { UpcomingReservationTile };
