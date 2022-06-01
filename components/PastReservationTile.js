@@ -4,7 +4,19 @@ import { View, Text, StyleSheet } from 'react-native'
 function PastReservationTile (props){
     const styles = props.styles;
     const reservation = props.reservation;
-    const [isExpanded, setisExpanded] = useState(false); //not expanding, review prop
+    const [isExpanded, setisExpanded] = useState(false);
+    const expanded = styles.expanded;
+    const collapsed = styles.collapsed;
+    const colour = styles.pstColour;
+    const size = styles.size;
+    const first = styles.first;
+    const last = styles.last;
+    const headerText = styles.headerText;
+    const bodyText = styles.bodyText;
+    const index = props.index;
+    const arrLength = props.length;
+    const stylesSlnLarge = index == 0 ? [expanded, colour, size] : index == (arrLength - 1) ? [expanded, colour, size] : [expanded, colour, size];
+    const stylesSlnSmall = index == 0 ? [collapsed, colour, size] : index == (arrLength - 1) ? [collapsed, colour, size] : [collapsed, colour, size];
 
     const toggleTile = () => {
         if(isExpanded){
@@ -17,21 +29,62 @@ function PastReservationTile (props){
     if(isExpanded){
         return(
             <View 
-            //Round corners of 1st & last res
-            style={props.index == 0 ? styles.pstFirstExpanded : props.index == props.length - 1 ? styles.pstLastExpanded : styles.pstExpanded} 
+            style={stylesSlnLarge}
             onStartShouldSetResponder={() => toggleTile()}>
-                <Text>{reservation.date} {reservation.time}</Text>
-                <Text>{reservation.type}</Text>
+                <View style={stylesLocal.header}>
+                    <Text style={headerText}>{reservation.date}</Text>
+                </View>
+                <View style={stylesLocal.body}>
+                    <Text style={headerText}>
+                        Time&nbsp;
+                        <Text style={bodyText}>
+                            {reservation.time}
+                        </Text>
+                    </Text>
+                    <Text style={headerText}>
+                        Type&nbsp;
+                        <Text style={bodyText}>
+                            {reservation.type}
+                        </Text>
+                    </Text>
+                    <Text style={headerText}>
+                        Guests&nbsp;
+                        <Text style={bodyText}>
+                            {reservation.noOfGuests}
+                        </Text>
+                    </Text>
+                    <Text style={headerText}>
+                        Status&nbsp;
+                        <Text style={bodyText}>
+                            {reservation.status}
+                        </Text>
+                    </Text>
+                    <Text style={headerText}>
+                        Ref#&nbsp;
+                        <Text style={bodyText}>
+                            {reservation.referenceNo}
+                        </Text>
+                    </Text>
+                </View>
             </View>
         );
     }
     return(
         <View
-        style={props.index == 0 ? styles.pstFirstCollapsed : props.index == props.length - 1 ? styles.pstLastCollapsed : styles.pstCollapsed}
+        style={stylesSlnSmall}
         onStartShouldSetResponder={() => toggleTile()}>
-            <Text>Collapsed: {reservation.date} {reservation.time}</Text>
+            <Text style={headerText}>{reservation.date}</Text>
         </View>
     );
 }
+
+const stylesLocal = StyleSheet.create({
+    header: {
+        width: '100%'
+    },
+    body: {
+        width: '100%'
+    }
+});
 
 export { PastReservationTile  };

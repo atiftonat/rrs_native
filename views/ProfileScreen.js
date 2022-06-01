@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
-import { SafeAreaView, Text, View , StyleSheet} from 'react-native';
+import { View , StyleSheet, ScrollView, Text} from 'react-native';
 import { fetchApi } from '../services'
 import { UpcomingReservationTile, PastReservationTile } from '../components'
-import { ScrollView } from 'react-native-web';
+
 
 function ProfileScreen({ navigation, route }) {
     const [reservationsUpcomingData, setReservationsUpcomingData] = useState([]);
@@ -18,6 +18,7 @@ function ProfileScreen({ navigation, route }) {
     useEffect(() => {
         fetchApi.reservations.getAll(email, jwt)
             .then(response => {
+                console.log(response);
                 if(response.status === 403){
                     //Forbidden member screen (admin, employee)
                     console.log("403: Account not member");
@@ -29,12 +30,14 @@ function ProfileScreen({ navigation, route }) {
     }, []);
 
     useEffect(() => {      
-        setUpcomingReservations(reservationsUpcomingData.map((r) =>
+        setUpcomingReservations(reservationsUpcomingData.map((r, i) =>
             <UpcomingReservationTile 
                 key = {`${r.referenceNo}`}
                 reservation = {r}
                 isExpanded = {+r.referenceNo == selectedUpcomingTileIndex}
                 setSelected = {()=>setSelectedUpcomingTileIndex(+r.referenceNo==selectedUpcomingTileIndex?'':r.referenceNo)}
+                index = {i}
+                length = {reservationsUpcomingData.length}
                 styles = {styles}
             />
         ));
@@ -53,125 +56,84 @@ function ProfileScreen({ navigation, route }) {
     }, [reservationsPastData]);
 
     return(
-        <SafeAreaView>
-            <View style={styles.container}>
-                {upcomingReservations}
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+            <View style={{paddingVertical: 20}}>
+                <View style={[styles.collapsed, styles.upcColour, styles.size]}>
+                    <Text style={[styles.headerText]}>Upcoming</Text>
+                </View>
+                <View style={styles.size}>
+                    {upcomingReservations}
+                </View>
             </View>
-            
-            <View style={styles.container}>
-                {pastReservations}  
+            <View>
+                <View style={[styles.collapsed, styles.pstColour, styles.size]}>
+                    <Text style={styles.headerText}>Past</Text>
+                </View>
+                <View style={[styles.size, {paddingBottom: 20}]}>
+                    {pastReservations}  
+                </View>
             </View>
-        </SafeAreaView>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        margin: 30
+    contentContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#DEF5E7'
     },
-    upcExpanded: {
-        flex: 2,
-        backgroundImage: "linear-gradient(#22c1c3, #2d5efd)",
+    upcColour: {
+        backgroundImage: "linear-gradient(#22c1c3, #2d5efd)"
+    },
+    pstColour: {
+        backgroundImage: "linear-gradient(#c5a98e, #ee9144)"
+    },
+    size: {
+        height: 'auto',
+        borderRadius: 8,
+        minWidth: '80%'
+    },
+    expanded: {
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
+        padding: 10,
+        margin: 2.5
     },
-    upcFirstExpanded: {
+    first: {
         borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-        flex: 2,
-        backgroundImage: "linear-gradient(#22c1c3, #2d5efd)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
+        borderTopRightRadius: 8
     },
-    upcLastExpanded: {
+    last: {
         borderBottomLeftRadius: 8,
-        borderBottomRightRadius: 8,
-        flex: 2,
-        backgroundImage: "linear-gradient(#22c1c3, #2d5efd)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
+        borderBottomRightRadius: 8
     },
-    upcCollapsed: {
+    collapsed: {
         flex: 1,
-        backgroundImage: "linear-gradient(#22c1c3, #2d5efd)",
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
+        padding: 10,
+        margin: 2.5
     },
-    upcFirstCollapsed: {
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-        backgroundImage: "linear-gradient(#22c1c3, #2d5efd)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        width: '100%'
+    headerText: {
+        fontWeight: 'bold',
+        fontFamily: 'QuicksandRegular',
+        fontSize: 18,
+        letterSpacing: '.15em'
     },
-    upcLastCollapsed: {
-        borderBottomLeftRadius: 8,
-        borderBottomRightRadius: 8,
-        backgroundImage: "linear-gradient(#22c1c3, #2d5efd)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        width: '100%'
-    },
-    pstExpanded: {
+    bodyText: {
         flex: 2,
-        backgroundImage: "linear-gradient(#c5a98e, #ee9144)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        width: '100%'
+        fontFamily: 'QuicksandLight',
+        fontSize: 18
     },
-    pstFirstExpanded: {
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-        flex: 2,
-        backgroundImage: "linear-gradient(#c5a98e, #ee9144)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        width: '100%'
-    },
-    pstLastExpanded: {
-        borderBottomLeftRadius: 8,
-        borderBottomRightRadius: 8,
-        flex: 2,
-        backgroundImage: "linear-gradient(#c5a98e, #ee9144)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        width: '100%'
-    },
-    pstCollapsed: {
-        flex: 1,
-        backgroundImage: "linear-gradient(#c5a98e, #ee9144)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        width: '100%'
-    },
-    pstFirstCollapsed: {
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-        backgroundImage: "linear-gradient(#c5a98e, #ee9144)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        width: '100%'
-    },
-    pstLastCollapsed: {
-        borderBottomLeftRadius: 8,
-        borderBottomRightRadius: 8,
-        backgroundImage: "linear-gradient(#c5a98e, #ee9144)",
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        width: '100%'
+    tinyLogo: {
+        width: 50,
+        height: 50,
+        shadowColor: 'black',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.5
     }
 });
 

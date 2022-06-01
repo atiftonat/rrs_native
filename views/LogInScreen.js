@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
-import { StyleSheet, Text, SafeAreaView, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TextInput, Button, View } from 'react-native';
+import { ImageBackground } from 'react-native-web';
 import { fetchApi } from '../services';
 
 function LogInScreen({ navigation }){
@@ -40,49 +41,69 @@ function LogInScreen({ navigation }){
   
     return(
         <SafeAreaView style={styles.container}>
-          
-            <Text>{summaryErrMsg}</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={(e) => {setEmail(e)}}
-              placeholder='youremail@gmail.com'
-              keyboardType='email-address' 
-            />
-            <Text>{emailErrMsg}</Text>
-    
-            <TextInput
-              style={styles.input}
-              onChangeText={(e) => setPassword(e)}
-              placeholder='yourpassword'
-              secureTextEntry={false} 
-            />
-            <Text>{passwordErrMsg}</Text>
-    
-            <Button
-              title='Login'
-              color="#841584"
-              onPress={onLoginRequest} 
-            /> 
-            
-            <Text>{jwt}</Text>
-  
+          <Text style={styles.headerText}>Bean</Text>
+          <Text style={styles.headerText}>Scene</Text>
+          <ImageBackground
+            style={styles.icon}
+            source={require('../assets/icons/coffee.png')}>
+              <View style={styles.logInContainer}>
+                <Text>{summaryErrMsg}</Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={(e) => {setEmail(e)}}
+                  placeholder='youremail@gmail.com'
+                  keyboardType='email-address' 
+                />
+                <Text>{emailErrMsg}</Text>
+        
+                <TextInput
+                  style={styles.input}
+                  onChangeText={(e) => setPassword(e)}
+                  placeholder='yourpassword'
+                  secureTextEntry={false} 
+                />
+                <Text>{passwordErrMsg}</Text>
+        
+                <Button
+                  title='Login'
+                  color="#841584"
+                  onPress={onLoginRequest} 
+                /> 
+              </View>
+            </ImageBackground>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    input: {
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-    }
+  container: {
+    flex: 1,
+    backgroundColor: "#DEF5E7",
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%'
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  icon: {
+    width: '100%',
+    height: '85%'
+  },
+  logInContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerText: {
+    fontWeight: 'bold',
+    fontFamily: 'QuicksandRegular',
+    fontSize: 36,
+    letterSpacing: '.15em'
+  }
 });
 
 export { LogInScreen };
