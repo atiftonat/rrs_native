@@ -26,7 +26,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{jwt ,setJwt}}>
       <NavigationContainer>
-        <Drawer.Navigator useLegacyImplementation initialRouteName='LogIn' screenOptions={{
+        <Drawer.Navigator useLegacyImplementation initialRouteName='Profile' screenOptions={{
           headerStyle: {
             backgroundColor: "#DEF5E7",
           },
