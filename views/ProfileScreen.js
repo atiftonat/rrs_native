@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'black'
     },
     pstColour: {
-        backgroundColor: 'black'
+        backgroundColor: 'rgba(0,0,0,0.9)'
     },
     size: {
         height: 'auto',

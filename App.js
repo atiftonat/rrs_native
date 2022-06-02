@@ -37,10 +37,12 @@ export default function App() {
             backgroundColor: '#DEF5E7',
             width: '40%'
           },
-          drawerInactiveBackgroundColor: 'white'
+          drawerInactiveBackgroundColor: '#DEF5E7',
+          drawerActiveTintColor: 'black'
         }}> 
+        {/* HACK: name attribute is 'log out' for drawer nav appearance */}
           <Drawer.Screen 
-            name='LogIn' 
+            name='Log Out' 
             component={LogInScreen}
             options={{
               headerShown: false,
