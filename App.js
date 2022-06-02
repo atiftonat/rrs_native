@@ -14,9 +14,11 @@ export default function App() {
   const Drawer = createDrawerNavigator();
 
   const [loaded] = useFonts({
-    QuicksandRegular: require('./assets/fonts/quicksand/static/Quicksand-Regular.ttf'),
-    QuicksandLight: require('./assets/fonts/quicksand/static/Quicksand-Light.ttf'),
     GochiHandRegular: require('./assets/fonts/gochi_hand/GochiHand-Regular.ttf'),
+    latoThin: require('./assets/fonts/lato/Lato-Thin.ttf'),
+    latoLight: require('./assets/fonts/lato/Lato-Light.ttf'),
+    latoRegular: require('./assets/fonts/lato/Lato-Regular.ttf'),
+    latoBold: require('./assets/fonts/lato/Lato-Bold.ttf'),
   });
   
   if (!loaded) {

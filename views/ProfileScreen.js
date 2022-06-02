@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'black'
     },
     pstColour: {
-        backgroundImage: "linear-gradient(#c5a98e, #ee9144)"
+        backgroundColor: 'black'
     },
     size: {
         height: 'auto',
@@ -119,22 +119,22 @@ const styles = StyleSheet.create({
     headerText: {
         color: 'white',
         fontWeight: 'bold',
-        fontFamily: 'QuicksandRegular',
+        fontFamily: 'latoBold',
         fontSize: 18,
         letterSpacing: '.15em'
     },
     bodyText: {
         color: 'white',
         flex: 2,
-        fontFamily: 'QuicksandLight',
+        fontFamily: 'latoThin',
         fontSize: 18
     },
     tinyLogo: {
         width: 50,
         height: 50,
-        shadowColor: 'black',
-        shadowOffset: {width: -2, height: 4},
-        shadowOpacity: 0.5
+        // shadowColor: 'black',
+        // shadowOffset: {width: -2, height: 4},
+        // shadowOpacity: 0.5
     }
 });
 

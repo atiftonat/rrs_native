@@ -99,10 +99,10 @@ const stylesLocal = StyleSheet.create({
     },
     footerTile: {
         marginVertical: 5,
-        backgroundImage: "linear-gradient(rgba(34, 193, 195, 0.6), rgba(45, 94, 253, 0.3))",
-        // backgroundImage: "linear-gradient(rgba(65, 65, 65, 0.6), rgba(0, 0, 0, 0.3))",
+        // backgroundImage: "linear-gradient(rgba(34, 193, 195, 0.6), rgba(45, 94, 253, 0.3))",
+        backgroundColor: 'white',
         padding: 10,
-        borderRadius: 10
+        borderRadius: '100%'
     }
 });
 

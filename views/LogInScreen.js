@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { StyleSheet, Text, SafeAreaView, TextInput, Button, Pressable, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TextInput, Button, Pressable, View, ScrollView, TouchableOpacity, Dimensions} from 'react-native';
 import { ImageBackground } from 'react-native-web';
 import { fetchApi } from '../services';
 
@@ -25,6 +25,9 @@ function LogInScreen({ navigation }){
         navigation.navigate('Profile', {
           email: `${email}`
         })
+      })
+      .catch(() => {
+        setSummaryErrMsg(`something went wrong, please try again later`);
       });
     }
   };
@@ -48,30 +51,34 @@ function LogInScreen({ navigation }){
             style={styles.icon}
             source={require('../assets/icons/coffee.png')}>
             <View style={styles.logInContainer}>
-              <Text>{summaryErrMsg}</Text>
+
+              <Text style={styles.errorTxt}>{summaryErrMsg}</Text>
+              <Text style={styles.errorTxt}>{emailErrMsg}</Text>
+              <Text style={styles.errorTxt}>{passwordErrMsg}</Text>
+
               <TextInput
                 onChangeText={(e) => {setEmail(e)}}
                 placeholder='youremail@gmail.com'
                 keyboardType='email-address' 
                 style={focus.user ? styles.inputOnFocus : styles.inputOnBlur}
-                onFocus={() => setFocus({user: true, password: true})}
+                onFocus={() => setFocus({user: true, password: false})}
+                onBlur={() => setFocus({user: false, password: false})}
               />
-              <Text>{emailErrMsg}</Text>
       
               <TextInput
                 onChangeText={(e) => setPassword(e)}
                 placeholder='yourpassword'
                 secureTextEntry={false} 
                 style={focus.password ? styles.inputOnFocus : styles.inputOnBlur}
-                onFocus={() => setFocus({user: true, password: true})}
+                onFocus={() => setFocus({user: false, password: true})}
+                onBlur={() => setFocus({user: false, password: false})}
               />
-              <Text>{passwordErrMsg}</Text>
       
             </View>
             <View style={styles.btnContainer}>
-              <Pressable style={styles.btn} onPress={onLoginRequest}>
+              <TouchableOpacity style={styles.btn} onPress={onLoginRequest}>
                   <Text style={styles.btnTxt}>LOGIN</Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </ImageBackground>
         </ScrollView>
@@ -84,7 +91,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#DEF5E7",
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%'
+    height: '100%',
+    width: '100%'
   },
   btn: {
     alignItems: 'center',
@@ -119,7 +127,7 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     padding: 10,
-    fontSize: 26,
+    fontSize: 24,
     textAlign: 'center',
     fontFamily: 'GochiHandRegular',
     outlineStyle: 'none'
@@ -139,6 +147,9 @@ const styles = StyleSheet.create({
     fontSize: 72,
     letterSpacing: '-.015em',
     lineHeight: 60
+  },
+  errorTxt: {
+    color: 'red'
   }
 });
 
