@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, TextInput, Button, Pressable, View, ScrollView, TouchableOpacity, Dimensions} from 'react-native';
 import { ImageBackground } from 'react-native-web';
 import { fetchApi } from '../services';
@@ -6,8 +6,8 @@ import { fetchApi } from '../services';
 function LogInScreen({ navigation }){
   const AuthContext = fetchApi.authentication.context;
   const { jwt, setJwt } = useContext(AuthContext);
-  const [email, setEmail] = useState("Seed@Person1.com");
-  const [password, setPassword] = useState("JellyBean1!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [emailErrMsg, setEmailErrMsg] = useState("");
   const [passwordErrMsg, setPasswordErrMsg] = useState("");
   const [summaryErrMsg, setSummaryErrMsg] = useState("");
@@ -68,7 +68,7 @@ function LogInScreen({ navigation }){
               <TextInput
                 onChangeText={(e) => setPassword(e)}
                 placeholder='yourpassword'
-                secureTextEntry={false} 
+                secureTextEntry={true} 
                 style={focus.password ? styles.inputOnFocus : styles.inputOnBlur}
                 onFocus={() => setFocus({user: false, password: true})}
                 onBlur={() => setFocus({user: false, password: false})}

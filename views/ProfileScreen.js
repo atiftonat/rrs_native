@@ -12,8 +12,7 @@ function ProfileScreen({ navigation, route }) {
     const AuthContext = fetchApi.authentication.context;
     const { jwt, setJwt } = useContext(AuthContext);
     const [ selectedUpcomingTileIndex, setSelectedUpcomingTileIndex ] = useState();
-    // const { email } = route.params;
-    const email = "Seed@Person1.com";
+    const { email } = route.params;
 
     useEffect(() => {
         fetchApi.reservations.getAll(email, jwt)

@@ -62,13 +62,25 @@ function UpcomingReservationTile(props){
                     <View style={stylesLocal.footerTile}>
                         <Image
                             style={tinyLogo}
-                            source={require('../assets/icons/Contact_matte.png')}
+                            source={require('../assets/icons/call.png')}
                         />
                     </View>
                     <View style={stylesLocal.footerTile}>
                         <Image
                             style={tinyLogo}
-                            source={require('../assets/icons/E-mail_matte.png')}
+                            source={require('../assets/icons/world-wide-web.png')}
+                        />
+                    </View>
+                    <View style={stylesLocal.footerTile}>
+                        <Image
+                            style={tinyLogo}
+                            source={require('../assets/icons/instagram.png')}
+                        />
+                    </View>
+                    <View style={stylesLocal.footerTile}>
+                        <Image
+                            style={tinyLogo}
+                            source={require('../assets/icons/facebook.png')}
                         />
                     </View>
                 </View>
@@ -101,7 +113,8 @@ const stylesLocal = StyleSheet.create({
         marginVertical: 5,
         // backgroundImage: "linear-gradient(rgba(34, 193, 195, 0.6), rgba(45, 94, 253, 0.3))",
         backgroundColor: 'white',
-        padding: 10,
+        borderWidth: 3,
+        borderColor: 'white',
         borderRadius: '100%'
     }
 });

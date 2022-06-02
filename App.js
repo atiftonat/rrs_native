@@ -28,7 +28,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{jwt ,setJwt}}>
       <NavigationContainer>
-        <Drawer.Navigator useLegacyImplementation initialRouteName='Profile' screenOptions={{
+        <Drawer.Navigator useLegacyImplementation initialRouteName='Log Out' screenOptions={{
           headerStyle: {
             backgroundColor: "#DEF5E7",
           },
@@ -42,11 +42,13 @@ export default function App() {
         }}> 
         {/* HACK: name attribute is 'log out' for drawer nav appearance */}
           <Drawer.Screen 
-            name='Log Out' 
+            name='LogIn'
             component={LogInScreen}
             options={{
+              drawerLabel: 'Sign Out',
               headerShown: false,
-              backgroundColor: "#DEF5E7"
+              backgroundColor: "#DEF5E7",      
+              title: 'Bean Scene'
             }}
           />
           <Drawer.Screen 
