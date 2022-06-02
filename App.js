@@ -14,8 +14,9 @@ export default function App() {
   const Drawer = createDrawerNavigator();
 
   const [loaded] = useFonts({
-    QuicksandRegular: require('./assets/fonts/static/Quicksand-Regular.ttf'),
-    QuicksandLight: require('./assets/fonts/static/Quicksand-Light.ttf'),
+    QuicksandRegular: require('./assets/fonts/quicksand/static/Quicksand-Regular.ttf'),
+    QuicksandLight: require('./assets/fonts/quicksand/static/Quicksand-Light.ttf'),
+    GochiHandRegular: require('./assets/fonts/gochi_hand/GochiHand-Regular.ttf'),
   });
   
   if (!loaded) {

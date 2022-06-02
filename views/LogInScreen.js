@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { StyleSheet, Text, SafeAreaView, TextInput, Button, View } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TextInput, Button, Pressable, View } from 'react-native';
 import { ImageBackground } from 'react-native-web';
 import { fetchApi } from '../services';
 
@@ -11,6 +11,7 @@ function LogInScreen({ navigation }){
   const [emailErrMsg, setEmailErrMsg] = useState("");
   const [passwordErrMsg, setPasswordErrMsg] = useState("");
   const [summaryErrMsg, setSummaryErrMsg] = useState("");
+  const [focus, setFocus] = useState({user: false, password: false});
 
   const onLoginRequest = () => {
     if(validLoginDetails(email, password)){
@@ -42,33 +43,35 @@ function LogInScreen({ navigation }){
     return(
         <SafeAreaView style={styles.container}>
           <Text style={styles.headerText}>Bean</Text>
-          <Text style={styles.headerText}>Scene</Text>
+          <Text style={styles.headerText}><i>Scene</i></Text>
           <ImageBackground
             style={styles.icon}
             source={require('../assets/icons/coffee.png')}>
               <View style={styles.logInContainer}>
                 <Text>{summaryErrMsg}</Text>
                 <TextInput
-                  style={styles.input}
                   onChangeText={(e) => {setEmail(e)}}
                   placeholder='youremail@gmail.com'
                   keyboardType='email-address' 
+                  style={focus.user ? styles.inputOnFocus : styles.inputOnBlur}
+                  onFocus={() => setFocus({user: true, password: true})}
                 />
                 <Text>{emailErrMsg}</Text>
         
                 <TextInput
-                  style={styles.input}
                   onChangeText={(e) => setPassword(e)}
                   placeholder='yourpassword'
                   secureTextEntry={false} 
+                  style={focus.password ? styles.inputOnFocus : styles.inputOnBlur}
+                  onFocus={() => setFocus({user: true, password: true})}
                 />
                 <Text>{passwordErrMsg}</Text>
         
-                <Button
-                  title='Login'
-                  color="#841584"
-                  onPress={onLoginRequest} 
-                /> 
+              </View>
+              <View style={styles.btnContainer}>
+                <Pressable style={styles.btn} onPress={onLoginRequest}>
+                    <Text style={styles.btnTxt}>LOGIN</Text>
+                </Pressable>
               </View>
             </ImageBackground>
         </SafeAreaView>
@@ -83,11 +86,43 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%'
   },
-  input: {
+  btn: {
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: 'black'
+  },
+  btnContainer: {
+    marginBottom: 20,
+    alignItems: 'center'
+  },
+  btnTxt: {
+    padding: 10,
+    fontSize: 32,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+  },
+  inputOnBlur: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
     padding: 10,
+    fontSize: 32,
+    textAlign: 'center',
+    fontFamily: 'GochiHandRegular',
+    outlineStyle: 'none'
+  },
+  inputOnFocus: {
+    height: 40,
+    margin: 12,
+    padding: 10,
+    fontSize: 26,
+    textAlign: 'center',
+    fontFamily: 'GochiHandRegular',
+    outlineStyle: 'none'
   },
   icon: {
     width: '100%',
@@ -100,9 +135,10 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontWeight: 'bold',
-    fontFamily: 'QuicksandRegular',
-    fontSize: 36,
-    letterSpacing: '.15em'
+    fontFamily: 'SaolDisplay',
+    fontSize: 72,
+    letterSpacing: '-.015em',
+    lineHeight: 60
   }
 });
 
