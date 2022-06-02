@@ -30,11 +30,20 @@ export default function App() {
           headerStyle: {
             backgroundColor: "#DEF5E7",
           },
-          headerShadowVisible: false
+          headerShadowVisible: false,
+          drawerStyle: {
+            backgroundColor: '#DEF5E7',
+            width: '40%'
+          },
+          drawerInactiveBackgroundColor: 'white'
         }}> 
           <Drawer.Screen 
             name='LogIn' 
             component={LogInScreen}
+            options={{
+              headerShown: false,
+              backgroundColor: "#DEF5E7"
+            }}
           />
           <Drawer.Screen 
             name='Profile' 

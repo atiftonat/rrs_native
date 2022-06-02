@@ -59,7 +59,7 @@ function ProfileScreen({ navigation, route }) {
         <ScrollView contentContainerStyle={styles.contentContainer}>
             <View style={{paddingVertical: 20}}>
                 <View style={[styles.collapsed, styles.upcColour, styles.size]}>
-                    <Text style={[styles.headerText]}>Upcoming</Text>
+                    <Text style={[styles.headerText, {fontSize: 27}]}>Upcoming</Text>
                 </View>
                 <View style={styles.size}>
                     {upcomingReservations}
@@ -67,7 +67,7 @@ function ProfileScreen({ navigation, route }) {
             </View>
             <View>
                 <View style={[styles.collapsed, styles.pstColour, styles.size]}>
-                    <Text style={styles.headerText}>Past</Text>
+                    <Text style={[styles.headerText, {fontSize: 27}]}>Past</Text>
                 </View>
                 <View style={[styles.size, {paddingBottom: 20}]}>
                     {pastReservations}  
@@ -84,15 +84,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#DEF5E7'
     },
     upcColour: {
-        backgroundImage: "linear-gradient(#22c1c3, #2d5efd)"
+        backgroundColor: 'black'
     },
     pstColour: {
         backgroundImage: "linear-gradient(#c5a98e, #ee9144)"
     },
     size: {
         height: 'auto',
-        borderRadius: 8,
-        minWidth: '80%'
+        borderRadius: 4,
+        width: '80vw'
     },
     expanded: {
         alignItems: 'center',
@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 8
     },
     collapsed: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
@@ -118,12 +117,14 @@ const styles = StyleSheet.create({
         margin: 2.5
     },
     headerText: {
+        color: 'white',
         fontWeight: 'bold',
         fontFamily: 'QuicksandRegular',
         fontSize: 18,
         letterSpacing: '.15em'
     },
     bodyText: {
+        color: 'white',
         flex: 2,
         fontFamily: 'QuicksandLight',
         fontSize: 18
