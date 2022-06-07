@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 const context = createContext(null); 
 
-let endpoint = "https://localhost:7271/api/tokens";
+let endpoint = "https://tas122.azurewebsites.net/api/tokens";
 
 const getJWT = async (logInDto) => {
     return await fetch(endpoint, {

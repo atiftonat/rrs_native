@@ -22,7 +22,7 @@ function ProfileScreen({ navigation, route }) {
                     //Forbidden member screen (admin, employee)
                     console.log("403: Account not member");
                 }
-                setSelectedUpcomingTileIndex(response.upcoming[0].referenceNo);
+                setSelectedUpcomingTileIndex(response?.upcoming[0]?.referenceNo);
                 setReservationsUpcomingData(response.upcoming);
                 setReservationsPastData(response.past);
             });
