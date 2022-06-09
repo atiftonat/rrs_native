@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { View , StyleSheet, ScrollView, Text} from 'react-native';
+import { View , StyleSheet, ScrollView, Text, Dimensions} from 'react-native';
 import { fetchApi } from '../services'
 import { UpcomingReservationTile, PastReservationTile } from '../components'
 
@@ -17,7 +17,6 @@ function ProfileScreen({ navigation, route }) {
     useEffect(() => {
         fetchApi.reservations.getAll(email, jwt)
             .then(response => {
-                console.log(response);
                 if(response.status === 403){
                     //Forbidden member screen (admin, employee)
                     console.log("403: Account not member");
@@ -57,16 +56,16 @@ function ProfileScreen({ navigation, route }) {
     return(
         <ScrollView contentContainerStyle={styles.contentContainer}>
             <View style={{paddingVertical: 20}}>
-                <View style={[styles.collapsed, styles.upcColour, styles.size]}>
-                    <Text style={[styles.headerText, {fontSize: 27}]}>Upcoming</Text>
+                <View style={[styles.collapsed, styles.size, {borderWidth:0}]}>
+                    <Text style={[styles.headerText, {fontSize: 27, color: '#323230'}]}>Upcoming</Text>
                 </View>
                 <View style={styles.size}>
                     {upcomingReservations}
                 </View>
             </View>
             <View>
-                <View style={[styles.collapsed, styles.pstColour, styles.size]}>
-                    <Text style={[styles.headerText, {fontSize: 27}]}>Past</Text>
+                <View style={[styles.collapsed, styles.size, {borderWidth:0}]}>
+                    <Text style={[styles.headerText, {fontSize: 27, color: '#3d3b3a'}]}>Past</Text>
                 </View>
                 <View style={[styles.size, {paddingBottom: 20}]}>
                     {pastReservations}  
@@ -79,14 +78,15 @@ function ProfileScreen({ navigation, route }) {
 const styles = StyleSheet.create({
     contentContainer: {
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#DEF5E7'
+        backgroundColor: '#DEF5E7',
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
     },
     upcColour: {
-        backgroundColor: 'black'
+        backgroundColor: '#323230'
     },
     pstColour: {
-        backgroundColor: 'rgba(0,0,0,0.9)'
+        backgroundColor: '#3d3b3a'
     },
     size: {
         height: 'auto',
