@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { useState } from 'react';
+import { View, Text, StyleSheet, Image, Pressable, Modal } from 'react-native'
 
 function UpcomingReservationTile(props){  
     const styles = props.styles;
@@ -18,6 +19,8 @@ function UpcomingReservationTile(props){
     const stylesSlnLarge = index == 0 ? [expanded, colour, size] : index == (arrLength - 1) ? [expanded, colour, size] : [expanded, colour, size];
     const stylesSlnSmall = index == 0 ? [collapsed, colour, size] : index == (arrLength - 1) ? [collapsed, colour, size] : [collapsed, colour, size];
     let isExpanded = props.isExpanded;
+    const [modalVisible, setModalVisible] = useState(false);
+
     if(isExpanded){
         return(
             <View 
@@ -59,12 +62,12 @@ function UpcomingReservationTile(props){
                     </Text>
                 </View>
                 <View style={stylesLocal.footer}>
-                    <View style={stylesLocal.footerTile}>
+                    <Pressable style={stylesLocal.footerTile} onPress={() => setModalVisible(true)}>
                         <Image
                             style={tinyLogo}
                             source={require('../assets/icons/call.png')}
                         />
-                    </View>
+                    </Pressable>
                     <View style={stylesLocal.footerTile}>
                         <Image
                             style={tinyLogo}
@@ -84,6 +87,34 @@ function UpcomingReservationTile(props){
                         />
                     </View>
                 </View>
+
+                
+
+                <View style={stylesLocal.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={stylesLocal.centeredView}>
+          <View style={stylesLocal.modalView}>
+            <Text style={stylesLocal.modalText}>Call 02 4229 7813</Text>
+            <Pressable
+              style={[stylesLocal.button, stylesLocal.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={stylesLocal.textStyle}>Cancel</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    </View>
+
+
+
             </View>
         );
     }
@@ -116,7 +147,51 @@ const stylesLocal = StyleSheet.create({
         borderWidth: 3,
         borderColor: 'white',
         borderRadius: '100%'
-    }
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "flex-end",
+        alignItems: "center",
+        marginTop: 22
+      },
+      modalView: {
+        borderRadius: 4,
+        margin: 20,
+        backgroundColor: "rgba(255,255,255,0.9)",
+        padding: 35,
+        width: "81%",
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+      },
+      button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        width: "90%"
+      },
+      buttonOpen: {
+        backgroundColor: "#F194FF",
+      },
+      buttonClose: {
+        backgroundColor: "darkred",
+      },
+      textStyle: {
+        color: "white",
+        fontSize: 24,
+        textAlign: "center"
+      },
+      modalText: {
+        fontSize: 24,
+        marginBottom: 15,
+        textAlign: "center"
+      }
 });
 
 export { UpcomingReservationTile };
