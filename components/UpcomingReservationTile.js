@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Image, Pressable, Modal } from 'react-native'
+import { Entypo } from '@expo/vector-icons';
 
 function UpcomingReservationTile(props){  
     const styles = props.styles;
@@ -101,7 +102,7 @@ function UpcomingReservationTile(props){
       >
         <View style={stylesLocal.centeredView}>
           <View style={stylesLocal.modalView}>
-            <Text style={stylesLocal.modalText}>Call 02 4229 7813</Text>
+            <Text style={stylesLocal.modalText}>Call 02 4229 7813&nbsp;<Entypo name="phone" size={24} color="black" /></Text>
             <Pressable
               style={[stylesLocal.button, stylesLocal.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
