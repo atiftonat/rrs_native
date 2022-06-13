@@ -28,37 +28,37 @@ function UpcomingReservationTile(props){
             style={stylesSlnLarge}
             onStartShouldSetResponder={setSelected}>
                 <View style={stylesLocal.header}>
-                    <Text style={headerText}>{reservation.date}</Text>
+                    <Text style={headerText}>Thursday, 14 Jul 2022</Text>
                 </View>
                 <View style={stylesLocal.body}>
                     <Text style={headerText}>
                         Time&nbsp;
                         <Text style={bodyText}>
-                            {reservation.time}
+                            11:00AM
                         </Text>
                     </Text>
                     <Text style={headerText}>
                         Type&nbsp;
                         <Text style={bodyText}>
-                            {reservation.type}
+                            Lunch
                         </Text>
                     </Text>
                     <Text style={headerText}>
                         Guests&nbsp;
                         <Text style={bodyText}>
-                            {reservation.noOfGuests}
+                            4
                         </Text>
                     </Text>
                     <Text style={headerText}>
                         Status&nbsp;
                         <Text style={bodyText}>
-                            {reservation.status}
+                            Pending
                         </Text>
                     </Text>
                     <Text style={headerText}>
                         Ref#&nbsp;
                         <Text style={bodyText}>
-                            {reservation.referenceNo}
+                            10031
                         </Text>
                     </Text>
                 </View>

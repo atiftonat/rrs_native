@@ -32,37 +32,37 @@ function PastReservationTile (props){
             style={stylesSlnLarge}
             onStartShouldSetResponder={() => toggleTile()}>
                 <View style={stylesLocal.header}>
-                    <Text style={headerText}>{reservation.date}</Text>
+                    <Text style={headerText}>Wendesday, 01 Jun 2022</Text>
                 </View>
                 <View style={stylesLocal.body}>
                     <Text style={headerText}>
                         Time&nbsp;
                         <Text style={bodyText}>
-                            {reservation.time}
+                            10:30AM
                         </Text>
                     </Text>
                     <Text style={headerText}>
                         Type&nbsp;
                         <Text style={bodyText}>
-                            {reservation.type}
+                            Breakfast
                         </Text>
                     </Text>
                     <Text style={headerText}>
                         Guests&nbsp;
                         <Text style={bodyText}>
-                            {reservation.noOfGuests}
+                            5
                         </Text>
                     </Text>
                     <Text style={headerText}>
                         Status&nbsp;
                         <Text style={bodyText}>
-                            {reservation.status}
+                            Pending
                         </Text>
                     </Text>
                     <Text style={headerText}>
                         Ref#&nbsp;
                         <Text style={bodyText}>
-                            {reservation.referenceNo}
+                            10030
                         </Text>
                     </Text>
                 </View>
